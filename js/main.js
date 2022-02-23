@@ -10,27 +10,29 @@
 const numKilometers = parseInt(prompt('Quanti chilometri devi percorrere?'));
 const etaPassenger = parseInt(prompt('Inserisci la tua età'));
 let priceTicket = 0;
-
+let message = "";
 
 console.log(
     `L'utente vuole percorrere ${numKilometers} Km 
 ed ha ${etaPassenger} anni`);
 document.getElementById('my-num-km').innerHTML = numKilometers;
 document.getElementById('my-age').innerHTML = etaPassenger;
+priceTicket = (numKilometers * 0.21);
 
 
 if (etaPassenger < 18)
 {
-    priceTicket = (numKilometers * 0.21);
-    // priceTicket = (numKilometers * 0.21) - 20%;
-    console.log(`L'utente è minorenne, applico uno sconto del 20%. Costo totale: ${priceTicket}Euro.`);
+    priceTicket -= priceTicket * 0.2;
+    priceTicket = priceTicket.toFixed(2); // Converto il numero con sole 2 cifre decimali
+    message = `L'utente è minorenne, applico uno sconto del 20%. Costo totale: ${priceTicket}€.`;
 } else if (etaPassenger > 65){
-    priceTicket = (numKilometers * 0.21);
-    // priceTicket = (numKilometers * 0.21) - 40%;
-    console.log(`L'utente è un over 65, applico uno sconto del 40%. Costo totale: ${priceTicket}Euro.`);
+    priceTicket -= priceTicket * 0.4;
+    priceTicket = priceTicket.toFixed(2);
+    message = `L'utente è un over 65, applico uno sconto del 40%. Costo totale: ${priceTicket}€.`;
 } else {
-    priceTicket = (numKilometers * 0.21);
-    console.log(`Non ci sono esenzioni, il costo del biglietto è di ${priceTicket}Euro.`);
+    priceTicket = priceTicket.toFixed(2);
+    message = `Non ci sono esenzioni, il costo del biglietto è di ${priceTicket}€.`;
 }
 
-
+console.log(message);
+document.getElementById('total-price').innerHTML = message;
